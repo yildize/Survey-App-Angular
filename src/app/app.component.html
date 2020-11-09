@@ -1,0 +1,46 @@
+
+
+<!-- Eğer join veya home page'de isek aşağıdaki section görülecek -->
+<section *ngIf="(getRoute()==='/join') || getRoute()==='/'" class="main" fxLayout fxLayoutAlign="center">
+  <mat-card class="card" fxFlex.xs="100%" fxFlex="400px">
+    <mat-card-title  fxLayoutAlign="center center">Meltem Etkinlik Anketörü</mat-card-title>
+    <mat-card-content fxLayoutAlign="center">
+    </mat-card-content>
+    <mat-card-actions fxLayoutAlign="center" fxLayoutGap="10px">
+      <a mat-raised-button  color="primary" routerLink="/create" >Yarat</a>
+      <a mat-raised-button  routerLink="/join" >Katıl</a>
+      <a mat-raised-button  color="primary" routerLink="/look" >Gör</a>
+    </mat-card-actions>
+  </mat-card>
+</section>
+
+<!-- Eğer create sekmesindeysek:-->
+<section  *ngIf="getRoute()==='/create'" class="main" fxLayout fxLayoutAlign="center">
+  <mat-card class="card" fxFlex.xs="100%" fxFlex="400px">
+    <mat-card-title  fxLayoutAlign="center center">Meltem Etkinlik Anketörü</mat-card-title>
+    <mat-card-content fxLayoutAlign="center">
+    </mat-card-content>
+    <mat-card-actions fxLayoutAlign="center" fxLayoutGap="10px">
+      <a mat-raised-button  routerLink="/create" >Yarat</a>
+      <a mat-raised-button  color="primary" routerLink="/join" >Katıl</a>
+      <a mat-raised-button  color="primary" routerLink="/look" >Gör</a>
+    </mat-card-actions>
+  </mat-card>
+</section>
+
+
+<!-- Eğer look sekmesindeysek:-->
+<section  *ngIf="getRoute()==='/look'" class="main" fxLayout fxLayoutAlign="center">
+  <mat-card class="card" fxFlex.xs="100%" fxFlex="400px">
+    <mat-card-title  fxLayoutAlign="center center">Meltem Etkinlik Anketörü</mat-card-title>
+    <mat-card-content fxLayoutAlign="center">
+    </mat-card-content>
+    <mat-card-actions fxLayoutAlign="center" fxLayoutGap="10px">
+      <a mat-raised-button  color="primary" routerLink="/create" >Yarat</a>
+      <a mat-raised-button  color="primary" routerLink="/join" >Katıl</a>
+      <a mat-raised-button  routerLink="/look" >Gör</a>
+    </mat-card-actions>
+  </mat-card>
+</section>
+
+<router-outlet></router-outlet>

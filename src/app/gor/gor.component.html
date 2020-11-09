@@ -1,0 +1,67 @@
+<section   class="main" fxLayout fxLayoutAlign="center" >
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm" fxFlex.xs="100%" fxFlex="400px">
+   <mat-card [style.backgroundColor]="'#4cadd2d9'" >
+     <mat-card-title fxLayoutAlign="center center">Anketi Gör</mat-card-title>
+     <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+       <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput placeholder="Örn: oynasoytari" ngModel name="ID" required>
+      </mat-form-field>
+     </mat-card-content>
+     <mat-card-actions fxLayoutAlign="center">
+       <button type="submit" color="warn" mat-raised-button [disabled]="f.invalid || this.formID==f.value.ID">Gör</button>
+     </mat-card-actions>
+   </mat-card>
+ </form>
+ </section>
+
+
+<section *ngIf="!notFound && dataSource!=undefined" class="main" [style.backgroundColor]="'#4cadd28c'">
+<div [style.backgroundColor]="'#4cadd28c'">
+  <h1 style="text-align:center; margin:0px; color:whitesmoke;" [style.backgroundColor]="'#4cadd28c'">{{selectedSurvey.Question}}</h1>
+</div>
+<div >
+
+  <div [style.backgroundColor]="'#4cadd28c'">
+    <div fxLayoutAlign="center center" [style.backgroundColor]="'#4cadd28c'">
+      <mat-form-field fxFlex="40%">
+        <input matInput type="text" (keyup)="doFilter($event.target.value)"  placeholder="Filtrele">
+      </mat-form-field>
+    </div>
+  </div>
+
+    <mat-table [style.backgroundColor]="'#4cadd28c'" [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="option">
+        <mat-header-cell  class="headerCell" *matHeaderCellDef >Seçenekler</mat-header-cell>
+        <mat-cell class="cell" *matCellDef="let element"> {{element.option }}</mat-cell>
+      </ng-container>
+    
+
+      <ng-container matColumnDef="count"> 
+        <mat-header-cell class="headerCell" *matHeaderCellDef mat-sort-header>Oy sayısı</mat-header-cell>
+        <mat-cell class="cell" *matCellDef="let element"> {{element.count }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="percent">
+        <mat-header-cell class="headerCell" *matHeaderCellDef mat-sort-header>Oy yüzdesi</mat-header-cell>
+        <mat-cell class="cell" *matCellDef="let element"> %{{element.percent}}</mat-cell>
+      </ng-container>
+    
+      <ng-container matColumnDef="names">
+        <mat-header-cell class="headerCell" *matHeaderCellDef >İsimler</mat-header-cell>
+        <mat-cell class="cell" *matCellDef="let element"> {{element.names }}</mat-cell>
+      </ng-container>
+    
+      <mat-header-row *matHeaderRowDef="displayedColumns;"> </mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div> 
+ </section>
+
+ 
+ <section *ngIf="notFound" class="main" fxLayout fxLayoutAlign="center" >
+  <mat-card [style.backgroundColor]="'#4cadd2d9'" fxFlex.xs="100%" fxFlex="400px">
+    <mat-card-title fxLayoutAlign="center center">Anket Bulunamadı!</mat-card-title>
+  </mat-card>
+</section>

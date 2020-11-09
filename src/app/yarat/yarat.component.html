@@ -1,0 +1,80 @@
+<section *ngIf="duplicateError" class="main" fxLayout fxLayoutAlign="center" >
+  <mat-card [style.backgroundColor]="'red'" fxFlex.xs="100%" fxFlex="400px" fxLayout="column" fxLayoutAlign="center center" >
+    <mat-card-content>Seçenekler aynı olamaz!</mat-card-content>
+  </mat-card>
+</section>
+
+<section *ngIf="isIDExists" class="main" fxLayout fxLayoutAlign="center" >
+  <mat-card [style.backgroundColor]="'red'" fxFlex.xs="100%" fxFlex="400px" fxLayout="column" fxLayoutAlign="center center" >
+    <mat-card-content>Denediğin ID kullanımda, başka bir ID dene!</mat-card-content>
+  </mat-card>
+</section>
+
+<section *ngIf="submitClicked==false" class="main" fxLayout fxLayoutAlign="center">
+  <div class="card" fxFlex.xs="100%" fxFlex="400px">
+    <div fxLayoutAlign="center center"><h1 style="color:white">Anket Oluştur</h1></div>
+    <section fxLayoutAlign="center">
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="example-form" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px" >
+            <mat-form-field class="example-full-width">
+              <mat-label>Anket Sorusu</mat-label>
+              <input name="Question" matInput placeholder="Örn: Akşam park?" required ngModel>
+            </mat-form-field>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" style="width:285px;">
+              <button type="button" mat-icon-button  color="" (click)="genRandomID()">
+                <mat-icon>touch_app</mat-icon>
+              </button>
+            <mat-form-field class="example-full-width" >
+              <mat-label >Anket ID'si (Min 5 kar.)</mat-label>
+              <p class="error" *ngIf="isIDExists">Başka ID dene!</p> 
+              <input matInput placeholder="Örn: salaksalak20" required [(ngModel)]="genID" #inptf="ngModel"[value]="genID" name="ID" minlength=5>
+              <mat-error *ngIf="inptf.hasError('minlength')">Min 5 karakter!</mat-error>
+            </mat-form-field>
+          </div>
+    
+            <div fxLayoutGap="10px">
+              <mat-form-field  class="example-full-width">
+                <mat-label>Seçenek</mat-label>
+                <input name="O1" matInput required  ngModel>
+              </mat-form-field>
+            </div>
+            
+            <div fxLayoutGap="10px">
+              <mat-form-field  class="example-full-width">
+                <mat-label>Seçenek</mat-label>
+                <input name="O2" matInput required  ngModel>
+              </mat-form-field>
+            </div>         
+
+            <div fxLayoutGap="10px"  *ngFor="let option of options">
+              <mat-form-field  class="example-full-width">
+                <mat-label>{{option}}</mat-label>
+                <input  [name]="'O'+optCount"  matInput required ngModel >
+              </mat-form-field>
+            </div> 
+
+            <div fxLayoutGap="10px"> 
+              <button  type="button" mat-raised-button color="warn" (click)="addOption()">Ekle</button>   
+              <button type="submit" mat-raised-button   color="warn" [disabled]="f.invalid" >Anketi Kaydet</button>       
+            </div>
+        </form>
+
+      </section>
+  </div>
+</section>
+
+
+
+<section *ngIf="submitClicked==true " class="main" fxLayout fxLayoutAlign="center" >
+   <mat-card [style.backgroundColor]="'#4cadd2d9'" fxFlex.xs="100%" fxFlex="400px" fxLayout="column" fxLayoutAlign="center center" >
+     <mat-card-title  fxLayoutAlign="center center">Anket oluşturuldu!</mat-card-title>
+     <mat-form-field >
+      <mat-label>ID:</mat-label>
+      <input type="text" matInput value="{{genID}}" id="idContent">
+    </mat-form-field>
+     <button  type="button" (click)="copyClipboard()" mat-raised-button color="warn" routerLink="/join">Kopyala</button>
+   </mat-card>
+ </section>
+
+
+ 

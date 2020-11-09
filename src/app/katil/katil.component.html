@@ -1,0 +1,66 @@
+<section   class="main" fxLayout fxLayoutAlign="center" >
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm" fxFlex.xs="100%" fxFlex="400px">
+   <mat-card [style.backgroundColor]="'#4cadd2d9'" >
+     <mat-card-title fxLayoutAlign="center center">Ankete Katıl</mat-card-title>
+     <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+       <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput placeholder="Örn: oynasoytari" ngModel name="ID" required>
+      </mat-form-field>
+     </mat-card-content>
+     <mat-card-actions fxLayoutAlign="center">
+       <button type="submit" color="warn" mat-raised-button [disabled]="f.invalid || this.formID==f.value.ID">Katıl</button>
+     </mat-card-actions>
+   </mat-card>
+ </form>
+ </section>
+
+
+ <section *ngIf="isClicked && selectedSurvey!=undefined" class="main" fxLayout fxLayoutAlign="center" >
+  <form (ngSubmit)="onSubmit2(f2)" name="form" #f2="ngForm" fxFlex.xs="100%" fxFlex="400px">
+   <mat-card [style.backgroundColor]="'#4cadd2d9'" >
+     <mat-card-title fxLayoutAlign="center center">{{selectedSurvey.Question}}</mat-card-title>
+     <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+
+      <mat-form-field  class="example-full-width">
+        <input ngModel ngModel name="name" matInput placeholder="İsmini gir" required>
+      </mat-form-field>
+      
+      <h3>Cevabını seç:</h3>
+
+        <mat-radio-group [(ngModel)]="selectedOption" name="group" aria-label="Select an option" fxLayout="column" fxLayoutAlign="space-around none" fxLayoutGap="10px" >
+          <div *ngFor="let item of selectedSurveyOptions" fxLayout="row"  fxLayoutAlign="space-between center" fxLayoutGap="10px" style="width:200px;">
+            <mat-radio-button value="{{item}}" >{{item}} </mat-radio-button>
+            <div>
+              <p style="color:white">%{{getPercent(item)}}</p>
+            </div>
+          </div>
+          <mat-radio-button value="other">Diğer</mat-radio-button>
+        </mat-radio-group>
+
+        <p class="error" *ngIf="duplicateError">Girdiğin seçenek zaten var!</p> 
+        <mat-form-field *ngIf="selectedOption=='other' " class="example-full-width">
+          <input ngModel name="opt" matInput placeholder="Seçenek gir" required>
+        </mat-form-field>
+        </mat-card-content>
+
+      <mat-card-actions fxLayoutAlign="center">
+        <button type="submit" color="warn" mat-raised-button [disabled]="(f2.invalid) || (selectedOption=='' )">Gönder</button>
+      </mat-card-actions>
+
+   </mat-card>
+ </form>
+ </section>
+
+ <section *ngIf="duplicateError" class="main" fxLayout fxLayoutAlign="center" >
+  <mat-card [style.backgroundColor]="'red'" fxFlex.xs="100%" fxFlex="400px" fxLayout="column" fxLayoutAlign="center center" >
+    <mat-card-content>Bu seçenek zaten var!</mat-card-content>
+  </mat-card>
+</section>
+
+
+ <section *ngIf="selectedSurvey==undefined && isClicked" class="main" fxLayout fxLayoutAlign="center" >
+   <mat-card [style.backgroundColor]="'#4cadd2d9'" fxFlex.xs="100%" fxFlex="400px">
+     <mat-card-title fxLayoutAlign="center center">Anket Bulunamadı!</mat-card-title>
+   </mat-card>
+ </section>

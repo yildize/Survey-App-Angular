@@ -1,0 +1,15 @@
+.main {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.card {
+    background-color: #4cadd2d9;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
