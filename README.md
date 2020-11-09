@@ -1,5 +1,14 @@
 # MeltemSurvey
 
+A survey app that utilizes firebase. Users can create surveys with IDs, take part in them or just look for results. No authentication needed.
+A friend of mine ask me for a survey app that will help him and his friends to decide on daily activities. And I thought it would be a good practice for me to improve angular and firebase knowledge.
+
+The website is deployed on firebase and can be reached via [this link](https://meltemsurvey.web.app/)
+
+I deleted the firebase credentials from environment.ts and environment.prod.ts files. Don't forget to add yours if you are planning to utilize the app.
+
+## MeltemSurvey
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9.
 
 ## Development server
