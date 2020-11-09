@@ -1,7 +1,7 @@
 # MeltemSurvey
 
 A survey app that utilizes firebase. Users can create surveys with IDs, take part in them or just look for results. No authentication needed.
-A friend of mine ask me for a survey app that will help him and his friends to decide on daily activities. And I thought it would be a good practice for me to improve angular and firebase knowledge.
+A friend of mine ask me for a survey app that will help him and his friends to decide on daily activities. And I thought it would be a good practice for me to improve my angular and firebase knowledge.
 
 The website is deployed on firebase and can be reached via [this link](https://meltemsurvey.web.app/)
 
